@@ -1,0 +1,73 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code settings
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Pytest / Coverage / Test results
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# PIP and Pipenv logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# MyPy and other type checkers
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# PyInstaller
+*.spec
+
+# Local environment variables or secrets
+.env
+.env.*
+
+# IDEs
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Database
+*.sqlite3
+
+# Temporary files
+*.bak
+*.tmp
+*.swp
+*.swo
+*.~*
+
+# Optional: Ignore requirements.txt if auto-generated
+# requirements.txt

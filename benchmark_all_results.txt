@@ -1,0 +1,55 @@
+========== Cryptographic Benchmarking Results ==========
+
+----- Combined Execution Time and Memory Usage Benchmarks -----
+
+=== RSA Combined Benchmarks ===
+ Key_Size(bits)  KeyGen_Time  Enc_Time  Dec_Time  Avg_Mem_used(KB)
+           1024     0.014047  0.001634  0.005096          5.812695
+
+ Key_Size(bits)  KeyGen_Time  Enc_Time  Dec_Time  Avg_Mem_used(KB)
+           2048     0.010627  0.001472  0.001888          6.724414
+
+ Key_Size(bits)  KeyGen_Time  Enc_Time  Dec_Time  Avg_Mem_used(KB)
+           4096     0.015549   0.00136  0.006928          12.93457
+
+=== Diffie-Hellman Combined Benchmarks ===
+ Key_Size(bits)  KeyGen_Time  Shared_Secret_Time  Avg_Mem_used(KB)
+            256 4.417998e-07            0.000521          5.205078
+
+ Key_Size(bits)  KeyGen_Time  Shared_Secret_Time  Avg_Mem_used(KB)
+            512 3.921999e-07            0.001546          5.240234
+
+ Key_Size(bits)  KeyGen_Time  Shared_Secret_Time  Avg_Mem_used(KB)
+           1024 5.054000e-07            0.007867          5.882812
+
+ Key_Size(bits)  KeyGen_Time  Shared_Secret_Time  Avg_Mem_used(KB)
+           2048 4.898002e-07             0.00848          5.882812
+
+=== ECC Combined Benchmarks ===
+    Curve  KeyGen_Time  Enc_Time  Dec_Time  Avg_Mem_used(KB)
+secp256r1      0.00003  0.000381  0.000441           5.71875
+
+    Curve  KeyGen_Time  Enc_Time  Dec_Time  Avg_Mem_used(KB)
+secp384r1     0.000137  0.000775  0.000571          5.859375
+
+    Curve  KeyGen_Time  Enc_Time  Dec_Time  Avg_Mem_used(KB)
+secp521r1     0.000153  0.000789  0.000878          6.017578
+
+--------------------------------------------------------------------------------
+
+====== Kyber Benchmarking ======
+
+  Params    |  keygen  | keygen/s  |  encap  |  encap/s  |  decap  | decap/s 
+-----------------------------------------------------------------------------
+ Kyber512   |     7.71ms |    129.68 |   10.59ms |     94.45 |   14.40ms |    69.46
+ Kyber768   |    14.48ms |     69.07 |   17.68ms |     56.55 |   22.51ms |    44.42
+ Kyber1024  |    21.70ms |     46.08 |   25.27ms |     39.57 |   32.89ms |    30.40
+
+--------------------------------------------------------------------------------
+====== QRNG Kyber Benchmarking ======
+
+  Params    |  keygen  | keygen/s  |  encap  |  encap/s  |  decap  | decap/s 
+-----------------------------------------------------------------------------
+ Kyber512   |     8.25ms |    121.16 |   11.27ms |     88.71 |   15.99ms |    62.55
+ Kyber768   |    13.48ms |     74.19 |   17.91ms |     55.82 |   22.87ms |    43.72
+ Kyber1024  |    17.93ms |     55.77 |   23.47ms |     42.60 |   29.85ms |    33.51

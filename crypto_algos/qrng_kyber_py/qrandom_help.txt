@@ -1,0 +1,374 @@
+Help on package qrandom:
+
+NAME
+    qrandom - ANU Quantum Random Numbers.
+
+DESCRIPTION
+    Implements a quantum random number generator as a subclass of random.Random
+    as described on https://docs.python.org/3/library/random.html. The numbers
+    come from the ANU Quantum Random Number Generator at The Australian National
+    University (https://quantumnumbers.anu.edu.au/).
+    
+    You can use this module just like the standard random module. The module
+    replaces the default Mersenne Twister generator. Seeding is ignored
+    and getstate() and setstate() are not implemented because there is no state.
+    Also, getrandbits() is not available so randrange() can't cover arbitrarily
+    large ranges. There is no randbytes() because getrandbits() is not available.
+
+PACKAGE CONTENTS
+    _api
+    _cli
+    _generator
+    numpy
+    version
+
+CLASSES
+    random.Random(_random.Random)
+        qrandom._generator.QuantumRandom
+    
+    class QuantumRandom(random.Random)
+     |  QuantumRandom(batch_size: int = 1024)
+     |  
+     |  Quantum random number generator.
+     |  
+     |  Method resolution order:
+     |      QuantumRandom
+     |      random.Random
+     |      _random.Random
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, batch_size: int = 1024)
+     |      Initialises an instance of QuantumRandom.
+     |      
+     |      batch_size is the number of ANU random numbers fetched and cached
+     |      per API call (default is maximum allowed: 1024).
+     |  
+     |  fill(self, n: int = 1)
+     |      Fills the generator with n batches of 64-bit ints.
+     |      
+     |      The batch size is set during initialisation.
+     |  
+     |  getstate = _notimplemented(self, *args, **kwds) -> NoReturn
+     |  
+     |  random(self) -> float
+     |      Gets the next quantum random number in the range [0.0, 1.0).
+     |  
+     |  seed(self, *args, **kwds) -> None
+     |      Method is ignored. There is no seed for the quantum vacuum.
+     |      
+     |      Raises RuntimeError if docstring for seed does not exist.
+     |  
+     |  setstate = _notimplemented(self, *args, **kwds) -> NoReturn
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from random.Random:
+     |  
+     |  __getstate__(self)
+     |      # Issue 17489: Since __reduce__ was defined to fix #759889 this is no
+     |      # longer called; we leave it here because it has been here since random was
+     |      # rewritten back in 2001 and why risk breaking something.
+     |  
+     |  __reduce__(self)
+     |      Helper for pickle.
+     |  
+     |  __setstate__(self, state)
+     |  
+     |  betavariate(self, alpha, beta)
+     |      Beta distribution.
+     |      
+     |      Conditions on the parameters are alpha > 0 and beta > 0.
+     |      Returned values range between 0 and 1.
+     |  
+     |  choice(self, seq)
+     |      Choose a random element from a non-empty sequence.
+     |  
+     |  choices(self, population, weights=None, *, cum_weights=None, k=1)
+     |      Return a k sized list of population elements chosen with replacement.
+     |      
+     |      If the relative weights or cumulative weights are not specified,
+     |      the selections are made with equal probability.
+     |  
+     |  expovariate(self, lambd)
+     |      Exponential distribution.
+     |      
+     |      lambd is 1.0 divided by the desired mean.  It should be
+     |      nonzero.  (The parameter would be called "lambda", but that is
+     |      a reserved word in Python.)  Returned values range from 0 to
+     |      positive infinity if lambd is positive, and from negative
+     |      infinity to 0 if lambd is negative.
+     |  
+     |  gammavariate(self, alpha, beta)
+     |      Gamma distribution.  Not the gamma function!
+     |      
+     |      Conditions on the parameters are alpha > 0 and beta > 0.
+     |      
+     |      The probability distribution function is:
+     |      
+     |                  x ** (alpha - 1) * math.exp(-x / beta)
+     |        pdf(x) =  --------------------------------------
+     |                    math.gamma(alpha) * beta ** alpha
+     |  
+     |  gauss(self, mu, sigma)
+     |      Gaussian distribution.
+     |      
+     |      mu is the mean, and sigma is the standard deviation.  This is
+     |      slightly faster than the normalvariate() function.
+     |      
+     |      Not thread-safe without a lock around calls.
+     |  
+     |  lognormvariate(self, mu, sigma)
+     |      Log normal distribution.
+     |      
+     |      If you take the natural logarithm of this distribution, you'll get a
+     |      normal distribution with mean mu and standard deviation sigma.
+     |      mu can have any value, and sigma must be greater than zero.
+     |  
+     |  normalvariate(self, mu, sigma)
+     |      Normal distribution.
+     |      
+     |      mu is the mean, and sigma is the standard deviation.
+     |  
+     |  paretovariate(self, alpha)
+     |      Pareto distribution.  alpha is the shape parameter.
+     |  
+     |  randint(self, a, b)
+     |      Return random integer in range [a, b], including both end points.
+     |  
+     |  randrange(self, start, stop=None, step=1, _int=<class 'int'>)
+     |      Choose a random item from range(start, stop[, step]).
+     |      
+     |      This fixes the problem with randint() which includes the
+     |      endpoint; in Python this is usually not what you want.
+     |  
+     |  sample(self, population, k)
+     |      Chooses k unique random elements from a population sequence or set.
+     |      
+     |      Returns a new list containing elements from the population while
+     |      leaving the original population unchanged.  The resulting list is
+     |      in selection order so that all sub-slices will also be valid random
+     |      samples.  This allows raffle winners (the sample) to be partitioned
+     |      into grand prize and second place winners (the subslices).
+     |      
+     |      Members of the population need not be hashable or unique.  If the
+     |      population contains repeats, then each occurrence is a possible
+     |      selection in the sample.
+     |      
+     |      To choose a sample in a range of integers, use range as an argument.
+     |      This is especially fast and space efficient for sampling from a
+     |      large population:   sample(range(10000000), 60)
+     |  
+     |  shuffle(self, x, random=None)
+     |      Shuffle list x in place, and return None.
+     |      
+     |      Optional argument random is a 0-argument function returning a
+     |      random float in [0.0, 1.0); if it is the default None, the
+     |      standard random.random will be used.
+     |  
+     |  triangular(self, low=0.0, high=1.0, mode=None)
+     |      Triangular distribution.
+     |      
+     |      Continuous distribution bounded by given lower and upper limits,
+     |      and having a given mode value in-between.
+     |      
+     |      http://en.wikipedia.org/wiki/Triangular_distribution
+     |  
+     |  uniform(self, a, b)
+     |      Get a random number in the range [a, b) or [a, b] depending on rounding.
+     |  
+     |  vonmisesvariate(self, mu, kappa)
+     |      Circular data distribution.
+     |      
+     |      mu is the mean angle, expressed in radians between 0 and 2*pi, and
+     |      kappa is the concentration parameter, which must be greater than or
+     |      equal to zero.  If kappa is equal to zero, this distribution reduces
+     |      to a uniform random angle over the range 0 to 2*pi.
+     |  
+     |  weibullvariate(self, alpha, beta)
+     |      Weibull distribution.
+     |      
+     |      alpha is the scale parameter and beta is the shape parameter.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Class methods inherited from random.Random:
+     |  
+     |  __init_subclass__(**kwargs) from builtins.type
+     |      Control how subclasses generate random integers.
+     |      
+     |      The algorithm a subclass can use depends on the random() and/or
+     |      getrandbits() implementation available to it and determines
+     |      whether it can generate random integers from arbitrarily large
+     |      ranges.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from random.Random:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from random.Random:
+     |  
+     |  VERSION = 3
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from _random.Random:
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  getrandbits(self, k, /)
+     |      getrandbits(k) -> x.  Generates an int with k random bits.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from _random.Random:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+
+FUNCTIONS
+    betavariate(alpha, beta) method of qrandom._generator.QuantumRandom instance
+        Beta distribution.
+        
+        Conditions on the parameters are alpha > 0 and beta > 0.
+        Returned values range between 0 and 1.
+    
+    choice(seq) method of qrandom._generator.QuantumRandom instance
+        Choose a random element from a non-empty sequence.
+    
+    choices(population, weights=None, *, cum_weights=None, k=1) method of qrandom._generator.QuantumRandom instance
+        Return a k sized list of population elements chosen with replacement.
+        
+        If the relative weights or cumulative weights are not specified,
+        the selections are made with equal probability.
+    
+    expovariate(lambd) method of qrandom._generator.QuantumRandom instance
+        Exponential distribution.
+        
+        lambd is 1.0 divided by the desired mean.  It should be
+        nonzero.  (The parameter would be called "lambda", but that is
+        a reserved word in Python.)  Returned values range from 0 to
+        positive infinity if lambd is positive, and from negative
+        infinity to 0 if lambd is negative.
+    
+    fill(n: int = 1) method of qrandom._generator.QuantumRandom instance
+        Fills the generator with n batches of 64-bit ints.
+        
+        The batch size is set during initialisation.
+    
+    gammavariate(alpha, beta) method of qrandom._generator.QuantumRandom instance
+        Gamma distribution.  Not the gamma function!
+        
+        Conditions on the parameters are alpha > 0 and beta > 0.
+        
+        The probability distribution function is:
+        
+                    x ** (alpha - 1) * math.exp(-x / beta)
+          pdf(x) =  --------------------------------------
+                      math.gamma(alpha) * beta ** alpha
+    
+    gauss(mu, sigma) method of qrandom._generator.QuantumRandom instance
+        Gaussian distribution.
+        
+        mu is the mean, and sigma is the standard deviation.  This is
+        slightly faster than the normalvariate() function.
+        
+        Not thread-safe without a lock around calls.
+    
+    getstate = _notimplemented(*args, **kwds) -> NoReturn method of qrandom._generator.QuantumRandom instance
+        Method shouldn't be called for a quantum random number generator.
+    
+    lognormvariate(mu, sigma) method of qrandom._generator.QuantumRandom instance
+        Log normal distribution.
+        
+        If you take the natural logarithm of this distribution, you'll get a
+        normal distribution with mean mu and standard deviation sigma.
+        mu can have any value, and sigma must be greater than zero.
+    
+    normalvariate(mu, sigma) method of qrandom._generator.QuantumRandom instance
+        Normal distribution.
+        
+        mu is the mean, and sigma is the standard deviation.
+    
+    paretovariate(alpha) method of qrandom._generator.QuantumRandom instance
+        Pareto distribution.  alpha is the shape parameter.
+    
+    randint(a, b) method of qrandom._generator.QuantumRandom instance
+        Return random integer in range [a, b], including both end points.
+    
+    random() -> float method of qrandom._generator.QuantumRandom instance
+        Gets the next quantum random number in the range [0.0, 1.0).
+    
+    randrange(start, stop=None, step=1, _int=<class 'int'>) method of qrandom._generator.QuantumRandom instance
+        Choose a random item from range(start, stop[, step]).
+        
+        This fixes the problem with randint() which includes the
+        endpoint; in Python this is usually not what you want.
+    
+    sample(population, k) method of qrandom._generator.QuantumRandom instance
+        Chooses k unique random elements from a population sequence or set.
+        
+        Returns a new list containing elements from the population while
+        leaving the original population unchanged.  The resulting list is
+        in selection order so that all sub-slices will also be valid random
+        samples.  This allows raffle winners (the sample) to be partitioned
+        into grand prize and second place winners (the subslices).
+        
+        Members of the population need not be hashable or unique.  If the
+        population contains repeats, then each occurrence is a possible
+        selection in the sample.
+        
+        To choose a sample in a range of integers, use range as an argument.
+        This is especially fast and space efficient for sampling from a
+        large population:   sample(range(10000000), 60)
+    
+    seed(*args, **kwds) -> None method of qrandom._generator.QuantumRandom instance
+        Method is ignored. There is no seed for the quantum vacuum.
+        
+        Raises RuntimeError if docstring for seed does not exist.
+    
+    setstate = _notimplemented(*args, **kwds) -> NoReturn method of qrandom._generator.QuantumRandom instance
+        Method shouldn't be called for a quantum random number generator.
+    
+    shuffle(x, random=None) method of qrandom._generator.QuantumRandom instance
+        Shuffle list x in place, and return None.
+        
+        Optional argument random is a 0-argument function returning a
+        random float in [0.0, 1.0); if it is the default None, the
+        standard random.random will be used.
+    
+    triangular(low=0.0, high=1.0, mode=None) method of qrandom._generator.QuantumRandom instance
+        Triangular distribution.
+        
+        Continuous distribution bounded by given lower and upper limits,
+        and having a given mode value in-between.
+        
+        http://en.wikipedia.org/wiki/Triangular_distribution
+    
+    uniform(a, b) method of qrandom._generator.QuantumRandom instance
+        Get a random number in the range [a, b) or [a, b] depending on rounding.
+    
+    vonmisesvariate(mu, kappa) method of qrandom._generator.QuantumRandom instance
+        Circular data distribution.
+        
+        mu is the mean angle, expressed in radians between 0 and 2*pi, and
+        kappa is the concentration parameter, which must be greater than or
+        equal to zero.  If kappa is equal to zero, this distribution reduces
+        to a uniform random angle over the range 0 to 2*pi.
+    
+    weibullvariate(alpha, beta) method of qrandom._generator.QuantumRandom instance
+        Weibull distribution.
+        
+        alpha is the scale parameter and beta is the shape parameter.
+
+DATA
+    __all__ = ['QuantumRandom', 'betavariate', 'choice', 'choices', 'expov...
+
+FILE
+    /home/ryuzaki/Desktop/InfoSec/.venv/lib/python3.8/site-packages/qrandom/__init__.py
+
+
